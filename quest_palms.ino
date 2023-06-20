@@ -1,5 +1,4 @@
-// I release this code under the standard MIT licence;
-// (in addition to whatever StackExchange implies);
+
 # define INT_TIME 500
 
 const short triggerThreshold = 800;// Lower is more sensitive;
