@@ -1,32 +1,31 @@
 
-# define INT_TIME 500
+# define SEN_PIN A0
+# define RELAY_PIN 11
 
 const short triggerThreshold = 800;// Lower is more sensitive;
 
-const short countNum = 10;
+const short countNum = 3;
 short countSum = 0;
 short count = 0;
 short currVal = 1000;
-short delayTime = INT_TIME/countNum;
 
 void setup() {
-//  Serial.begin(9600);
-  pinMode(A0, INPUT);
-  pinMode(A5, OUTPUT);
-  digitalWrite(A5, LOW);
+  Serial.begin(9600);
+  pinMode(SEN_PIN, INPUT);
+  pinMode(RELAY_PIN, OUTPUT);
+  digitalWrite(RELAY_PIN, HIGH);
   delay(1);
 }
 
 void loop() {
-  short value = analogRead(A0);
+  short value = analogRead(SEN_PIN);
   short avrVal = GetAverage(value);
-//  Serial.print("triggerThreshold is ");
-//  Serial.print(value);
-//  Serial.print("\t");
-//  Serial.print("average triggerThreshold is ");
-//  Serial.println(avrVal);
-  digitalWrite(A5, (avrVal < triggerThreshold) ? HIGH : LOW);
-  delay(delayTime);// 10ms;
+  Serial.print("triggerThreshold is ");
+  Serial.print(value);
+  Serial.print("\t");
+  Serial.print("average triggerThreshold is ");
+  Serial.println(avrVal);
+  digitalWrite(RELAY_PIN, (avrVal < triggerThreshold) ? LOW : HIGH);
 }
 
 short GetAverage(short val){
